@@ -1,6 +1,7 @@
 package com.hiumayanga.api_practical.API
 
-import com.hiumayanga.api_practical.database.post.Post
+import com.hiumayanga.api_practical.model.Comment
+import com.hiumayanga.api_practical.model.Post
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Call
@@ -31,8 +32,8 @@ interface RetrofitApi {
     @GET("posts/{id}")
     fun getPost(@Path("id")id:Int): Call<List<Post>>
 
-    //@GET("posts/{id}/comments")
-    //fun getComments(@Path("id")id:Int): Call<List<Comment>>
+    @GET("posts/{id}/comments")
+    fun getComments(@Path("id")id:Int): Call<List<Comment>>
 }
 
 object RetrofitApiService{

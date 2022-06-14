@@ -1,22 +1,25 @@
 package com.hiumayanga.api_practical
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.hiumayanga.api_practical.API.RetrofitApiService
 import com.hiumayanga.api_practical.adapters.PostAdapter
-import com.hiumayanga.api_practical.database.post.Post
 import com.hiumayanga.api_practical.databinding.FragmentPostListBinding
+import com.hiumayanga.api_practical.model.Post
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 
 class PostListFragment : Fragment() {
+    companion object{
+        private val TAG =PostListFragment::class.java.simpleName
+    }
 
     private var _binding: FragmentPostListBinding?=null
     private val binding get()=_binding!!
@@ -37,24 +40,30 @@ class PostListFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
- //       binding.buttonTemp.setOnClickListener{
- //           fetchPosts()
- //       }
+        val recyclerviewPost =binding.recyclerviewPosts
+
+        adapter = PostAdapter(posts)
+        recyclerviewPost.adapter=adapter
+
         fetchPosts()
     }
 
     private fun fetchPosts(){
         val call= RetrofitApiService.retrofitService.getPosts()
         call.enqueue(object: Callback<List<Post>> {
+            @SuppressLint("NotifyDataSetChanged")
             override fun onResponse(call: Call<List<Post>>, response: Response<List<Post>>) {
-                //Toast.makeText(context,response.body()?.size.toString(),Toast.LENGTH_SHORT).show()
-                val posts= response.body()
-                val adapter=posts?.let { PostAdapter(it) }
-                binding.recyclerviewPosts.adapter=adapter
+                    Log.d(TAG,"Total posts: " + response.body()!!.size)
+
+                    val postsFromResponse = response.body()
+                    if(postsFromResponse != null){
+                        posts.addAll(postsFromResponse)
+                        adapter!!.notifyDataSetChanged()
+                    }
             }
 
             override fun onFailure(call: Call<List<Post>>, t: Throwable) {
-                Log.d("PostsListFragment",t.message.toString())
+                Log.e(TAG,"Got error : " + t.localizedMessage)
             }
 
 

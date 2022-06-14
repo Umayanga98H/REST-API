@@ -2,34 +2,34 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph_main_activity"
+    android:id="@+id/nav_graph_posts"
     app:startDestination="@id/postListFragment">
 
     <fragment
         android:id="@+id/postListFragment"
         android:name="com.hiumayanga.api_practical.PostListFragment"
-        android:label="fragment_post_list"
+        android:label="fragment_post_list_name"
         tools:layout="@layout/fragment_post_list" >
         <action
-            android:id="@+id/action_postListFragment_to_postDetails"
-            app:destination="@id/postDetails" />
+            android:id="@+id/action_postListFragment_to_postDetailsFragment"
+            app:destination="@id/postDetailsFragment" />
     </fragment>
     <fragment
-        android:id="@+id/postDetails"
+        android:id="@+id/postDetailsFragment"
         android:name="com.hiumayanga.api_practical.PostDetails"
         android:label="fragment_post_details"
         tools:layout="@layout/fragment_post_details" >
         <action
-            android:id="@+id/action_postDetails_to_commentList"
-            app:destination="@id/commentList" />
+            android:id="@+id/action_postDetailsFragment_to_commentListFragment"
+            app:destination="@id/commentListFragment" />
         <argument
             android:name="postid"
             app:argType="integer" />
     </fragment>
     <fragment
-        android:id="@+id/commentList"
+        android:id="@+id/commentListFragment"
         android:name="com.hiumayanga.api_practical.CommentList"
-        android:label="fragment_comment_list"
+        android:label="fragment_comment_list_name"
         tools:layout="@layout/fragment_comment_list" >
         <argument
             android:name="postid"

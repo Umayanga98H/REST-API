@@ -3,13 +3,11 @@ package com.hiumayanga.api_practical.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.hiumayanga.api_practical.R
-import com.hiumayanga.api_practical.database.post.Post
-import retrofit2.Callback
+import com.hiumayanga.api_practical.model.Post
 
 class PostAdapter(
     private val posts: List<Post>
@@ -31,18 +29,17 @@ class PostAdapter(
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
         val post = posts[position]
 
-        holder.textviewPostId.text = post.id.toString()
-        holder.textviewPostTitle.text = post.title
+        holder.textviewPostId.text=post.id.toString()
+        holder.textviewPostTitle.text=post.title
 
-        holder.view.setOnClickListener {
-
-//            val action = PostsListFragmentDirections
-//                .actionPostsListFragmentToPostDetailsFragment(
-//                    postId = post.id
-//                )
-
-//            it.findNavController().navigate(action)
+        holder.view.setOnClickListener{
+            val action=PostsListFragmentDirections
+                .actionPostListFragmentToPostDetailsFragment(
+                    postId=holder.textviewPostId.text.toString().toInt()
+                )
+            it.findNavController().navigate(action)
         }
+
     }
 
     override fun getItemCount() = posts.size

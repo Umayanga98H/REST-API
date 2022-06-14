@@ -1,5 +1,8 @@
 <resources>
-    <string name="app_name">API_Practical</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_name">API_PS2017199</string>
+    <string name="fragment_post_details_comments">Comments</string>
+    <string name="fragment_post_list_name">Posts</string>
+    <string name="fragment_comment_list_name">Comment of post {postId}</string>
+    <string name="fragment_comment_details_comments">Comments</string>
+
 </resources>
